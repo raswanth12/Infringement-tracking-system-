@@ -6,10 +6,6 @@ import java.util.stream.Collectors;
 
 import javax.management.openmbean.OpenType;
 
-import ai.openai.gpt.CompletionRequest;
-import ai.openai.gpt.CompletionResponse;
-import ai.openai.gpt.OpenAI;
-
 public class GPTFileProcessor {
 
     private final String apiKey;
@@ -29,7 +25,7 @@ public class GPTFileProcessor {
         CompletionRequest request = new CompletionRequest.Builder()
                 .prompt(inputText)
                 .build();
-        CompletionResponse response = api.complete(request);
+        CompletionResponse response = ((Object) api).complete(request);
 
         // Extract generated text from API response
         List<String> choices = response.getChoices().stream().map(choice -> choice.getText())
