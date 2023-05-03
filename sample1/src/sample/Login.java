@@ -1,4 +1,4 @@
-package sample;
+package sample1.src.sample;
 import java.sql.*;
 
 public class Login {

@@ -1,8 +1,8 @@
-package src;
+package sample1.src;
 
 import javax.swing.*;
 
-import src.LoginFrame;
+import sample1.src.LoginFrame;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,12 +1,12 @@
-package src;
+package sample1.src;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import src.panel.AdminPanel;
-import src.panel.StudentPanel;
-import src.panel.TeacherPanel;
+import sample1.src.panel.AdminPanel;
+import sample1.src.panel.StudentPanel;
+import sample1.src.panel.TeacherPanel;
 
 public class LoginFrame extends JFrame {
     private JTextField usernameField;

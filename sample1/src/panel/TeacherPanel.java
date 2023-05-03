@@ -1,4 +1,4 @@
-package src.panel;
+package sample1.src.panel;
 
 
 import javax.swing.*;

@@ -1,8 +1,8 @@
-package src.panel;
+package sample1.src.panel;
 
 import javax.swing.*;
 
-import src.DatabaseConnection;
+import sample1.src.DatabaseConnection;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
