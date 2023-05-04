@@ -1,5 +1,0 @@
-String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-PreparedStatement stmt = conn.prepareStatement(sql);
-stmt.setString(1, "user1");
-stmt.setString(2, "password1");
-stmt.executeUpdate();
