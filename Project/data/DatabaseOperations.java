@@ -1,4 +1,4 @@
-package fullproject.data;
+package Project.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
