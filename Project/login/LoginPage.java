@@ -20,7 +20,7 @@ public class LoginPage extends JFrame {
 
         GridBagConstraints c = new GridBagConstraints();
 
-        // Username label and field
+        //  Username label and field
         c.gridx = 0;
         c.gridy = 0;
         add(new JLabel("Username:"), c);
