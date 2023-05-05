@@ -15,7 +15,7 @@ public class DatabaseOperations {
                 ResultSet resultSet = statement.executeQuery();
 
                 while (resultSet.next()) {
-                    // Process the result set
+                     // Process the result set
                 }
             }
         } catch (SQLException e) {
