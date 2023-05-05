@@ -1,17 +1,22 @@
 import java.awt.BorderLayout;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import org.apache.commons.text.similarity.LongestCommonSubsequenceDistance;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.IOException;
+import java.lang.reflect.Type;
 
 public class TeacherDashboard extends JFrame {
     private JList<String> fileList;
@@ -80,23 +85,50 @@ public class TeacherDashboard extends JFrame {
             }
         }
 
-        // Implement the logic for checking if the text is AI-generated
-        // For example, you can use an external library, API or develop your own
-        // algorithm to detect AI-generated text
+        OkHttpClient client = new OkHttpClient();
+        Gson gson = new Gson();
 
         // Build a message with the AI-generated check results
         StringBuilder resultMessage = new StringBuilder();
         resultMessage.append("AI-Generated Text Check Results:\n\n");
 
         for (String file : selectedFiles) {
-            // Check if the text is AI-generated
-            // Replace the line below with your implementation
-            boolean isAiGenerated = false; // Dummy value
+            String content = selectedFileContents.get(file);
+            String jsonBody = gson.toJson(Collections.singletonMap("text", content));
 
-            resultMessage.append(String.format("%s: %s\n", file, isAiGenerated ? "AI-generated" : "Not AI-generated"));
+            RequestBody requestBody = RequestBody.create(jsonBody, okhttp3.MediaType.parse("application/json; charset=utf-8"));
+            Request request = new Request.Builder()
+                    .url("http://localhost:5000/ai_check")
+                    .post(requestBody)
+                    .build();
+
+            try (Response response = client.newCall(request).execute()) {
+                if (response.isSuccessful()) {
+                    String jsonResponse = response.body().string();
+                                        Type type = new TypeToken<HashMap<String, Object>>() {
+                    }.getType();
+                    Map<String, Object> resultMap = gson.fromJson(jsonResponse, type);
+                    boolean isAiGenerated = (boolean) resultMap.get("ai_generated");
+
+                    resultMessage.append(
+                            String.format("%s: %s\n", file, isAiGenerated ? "AI-generated" : "Not AI-generated"));
+                } else {
+                    throw new IOException("Unexpected code " + response);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this,
+                        "Error connecting to the Python server. Please ensure the server is running.");
+                return;
+            }
         }
 
         // Show the AI-generated text check results in a dialog box
         JOptionPane.showMessageDialog(this, resultMessage.toString());
     }
+
+    private void refreshFileList() {
+        // Add your implementation for refreshing the file list.
+    }
 }
+
