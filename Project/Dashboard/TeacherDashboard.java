@@ -1,8 +1,11 @@
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -128,7 +131,42 @@ public class TeacherDashboard extends JFrame {
     }
 
     private void refreshFileList() {
-        // Add your implementation for refreshing the file list.
+        // Call the getFiles() method to get the list of file names
+        List<String> fileNames = getFiles();
+
+        // Create a new DefaultListModel to store the file names
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+
+        // Add the file names to the list model
+        for (String fileName : fileNames) {
+            listModel.addElement(fileName);
+        }
+
+        // Set the list model for the fileList JList
+        fileList.setModel(listModel);
     }
+
+    /**
+     * @return
+     */
+    private List<String> getFiles() {
+        // Replace this method with your implementation to fetch the file names from the
+        // database or any other source
+        private void refreshFileList() {
+    List<String> fileNames = fetchFileNames();
+    DefaultListModel<String> model = new DefaultListModel<>();
+    for (String fileName : fileNames) {
+        model.addElement(fileName);
+    }
+    fileList.setModel(model);
+}
+
+        List<String> fileNames = new ArrayList<>();
+        fileNames.add("file1.txt");
+        fileNames.add("file2.txt");
+        fileNames.add("file3.txt");
+        return fileNames;
+    }
+
 }
 

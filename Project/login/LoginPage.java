@@ -107,7 +107,7 @@ public class LoginPage extends JFrame {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            // Prompt user to select user type (Student or Teacher)
+            //  user to select  (Student or Teacher)
             String[] userTypes = { "Student", "Teacher" };
             JComboBox<String> userTypeComboBox = new JComboBox<>(userTypes);
             JPanel panel = new JPanel(new GridLayout(0, 1));
@@ -120,7 +120,7 @@ public class LoginPage extends JFrame {
             if (result == JOptionPane.OK_OPTION) {
                 String userType = (String) userTypeComboBox.getSelectedItem();
 
-                // Replace with your actual database URL, username, and password
+                // Replace username, and password
                 String databaseUrl = "jdbc:mysql://localhost:3306/school";
                 String dbUsername = "mysql.infoschema";
                 String dbPassword = "omen0405";
