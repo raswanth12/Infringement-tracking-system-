@@ -67,3 +67,4 @@ if __name__ == '__main__':
     result_label.pack(padx=10, pady=10)
 
     root.mainloop()
+
