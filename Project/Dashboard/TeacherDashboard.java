@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import org.apache.commons.text.similarity.LongestCommonSubsequenceDistance;
 
@@ -16,6 +17,7 @@ public class TeacherDashboard extends JFrame {
     private JList<String> fileList;
     private JButton refreshButton;
     private JButton compareButton;
+    private JButton checkAiGeneratedButton;
 
     public TeacherDashboard() {
         setTitle("Teacher Dashboard");
@@ -30,39 +32,37 @@ public class TeacherDashboard extends JFrame {
         fileList = new JList<>();
         add(new JScrollPane(fileList), BorderLayout.CENTER);
 
+        // Create a panel for the buttons
+        JPanel buttonPanel = new JPanel();
+        add(buttonPanel, BorderLayout.SOUTH);
+
         compareButton = new JButton("Compare Files");
         compareButton.addActionListener(e -> compareSelectedFiles());
-        add(compareButton, BorderLayout.SOUTH);
+        buttonPanel.add(compareButton);
+
+        // Add the new "Check AI Generated" button
+        checkAiGeneratedButton = new JButton("Check AI Generated");
+        checkAiGeneratedButton.addActionListener(e -> checkAiGenerated());
+        buttonPanel.add(checkAiGeneratedButton);
 
         refreshFileList();
 
         setVisible(true);
     }
 
-    private void refreshFileList() {
-        // Call the Login.getUploadedFiles() method to retrieve the list of uploaded
-        // files from the database
-        List<FileRecord> uploadedFiles = (List<FileRecord>) Login.getUploadedFiles();
+    // ... (existing methods)
 
-        // Create a DefaultListModel to hold the file names
-        DefaultListModel<String> model = new DefaultListModel<>();
-
-        // Add each file name to the model
-        for (FileRecord file : uploadedFiles) {
-            model.addElement((String) file.getFilename());
-        }
-
-        // Set the JList's model to the DefaultListModel
-        fileList.setModel(model);
+    private Object compareSelectedFiles() {
+        return null;
     }
 
-    private void compareSelectedFiles() {
+    private void checkAiGenerated() {
         // Get the list of selected file names
         List<String> selectedFiles = fileList.getSelectedValuesList();
 
-        // Make sure at least 2 files are selected
-        if (selectedFiles.size() < 2) {
-            JOptionPane.showMessageDialog(this, "Please select at least two files to compare.");
+        // Make sure at least 1 file is selected
+        if (selectedFiles.size() < 1) {
+            JOptionPane.showMessageDialog(this, "Please select at least one file to check for AI-generated content.");
             return;
         }
 
@@ -80,33 +80,23 @@ public class TeacherDashboard extends JFrame {
             }
         }
 
-        // Use the Jaccard Similarity algorithm to compare the selected files
-        LongestCommonSubsequenceDistance lcsDistance = new LongestCommonSubsequenceDistance();
+        // Implement the logic for checking if the text is AI-generated
+        // For example, you can use an external library, API or develop your own
+        // algorithm to detect AI-generated text
 
-        // Build a message with the plagiarism check results
+        // Build a message with the AI-generated check results
         StringBuilder resultMessage = new StringBuilder();
-        resultMessage.append("Plagiarism Check Results:\n\n");
+        resultMessage.append("AI-Generated Text Check Results:\n\n");
 
-        for (String file1 : selectedFiles) {
-            for (String file2 : selectedFiles) {
-                if (!file1.equals(file2)) {
-                    Object levenshteinDistance;
-                    int distance = levenshteinDistance.apply(selectedFileContents.get(file1), selectedFileContents.get(file2));
-                    double similarity = 1.0 - ((double) distance) / Math.max(selectedFileContents.get(file1).length(),
-                            selectedFileContents.get(file2).length());
+        for (String file : selectedFiles) {
+            // Check if the text is AI-generated
+            // Replace the line below with your implementation
+            boolean isAiGenerated = false; // Dummy value
 
-                    resultMessage.append(String.format("%s vs %s: %.2f\n", file1, file2, similarity));
-                }
-            }
+            resultMessage.append(String.format("%s: %s\n", file, isAiGenerated ? "AI-generated" : "Not AI-generated"));
         }
 
-        // Show the plagiarism check results in a dialog box
+        // Show the AI-generated text check results in a dialog box
         JOptionPane.showMessageDialog(this, resultMessage.toString());
-                // Show the plagiarism check results in a dialog box
-        JOptionPane.showMessageDialog(this, resultMessage.toString());
-    
     }
-            }
-    
-
-        
+}

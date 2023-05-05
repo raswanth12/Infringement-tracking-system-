@@ -36,6 +36,7 @@ public static boolean authenticateUser(String databaseUrl, String dbUsername, St
                 }
             }
         }
+
     } catch (SQLException e) {
         System.err.println("Error connecting to the database: " + e.getMessage());
     }
@@ -51,4 +52,34 @@ public static List<FileRecord> getUploadedFiles() {
 public static boolean uploadFile(String name, String content) {
     return false;
 }
+
+// Add this method to the Login class
+public static boolean registerUser(String userType, String username, String password, String databaseUrl,
+        String dbUsername, String dbPassword)
+         {
+    String insertQuery;
+
+    if (userType.equalsIgnoreCase("student")) {
+        insertQuery = "INSERT INTO students (username, password) VALUES (?, ?)";
+    } else if (userType.equalsIgnoreCase("teacher")) {
+        insertQuery = "INSERT INTO teachers (username, password) VALUES (?, ?)";
+    } else {
+        return false; // Invalid user type
+    }
+
+    try (Connection connection = DriverManager.getConnection(databaseUrl, dbUsername, dbPassword)) {
+        try (PreparedStatement insertStatement = connection.prepareStatement(insertQuery)) {
+            insertStatement.setString(1, username);
+            insertStatement.setString(2, password);
+
+            int rowsAffected = insertStatement.executeUpdate();
+            return rowsAffected > 0;
+        }
+    } catch (SQLException e) {
+        System.err.println("Error connecting to the database: " + e.getMessage());
+    }
+
+    return false;
+}
+
 }

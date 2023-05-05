@@ -4,11 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
+
 public class LoginPage extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton studentLoginButton;
     private JButton teacherLoginButton;
+    private JButton registerButton;
 
     public LoginPage() {
         setTitle("Login");
@@ -55,6 +57,14 @@ public class LoginPage extends JFrame {
         add(teacherLoginButton, c);
 
         setVisible(true);
+        // Registration button
+        registerButton = new JButton("Register");
+        c.gridx = 0;
+        c.gridy = 3;
+        c.gridwidth = 2;
+        registerButton.addActionListener(new RegisterListener());
+        add(registerButton, c);
+
     }
 
     private class StudentLoginListener implements ActionListener {
@@ -87,6 +97,39 @@ public class LoginPage extends JFrame {
                 dispose(); // Close LoginPage
             } else {
                 JOptionPane.showMessageDialog(LoginPage.this, "Invalid teacher credentials.");
+            }
+        }
+    }
+    
+    private class RegisterListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
+
+            // Prompt user to select user type (Student or Teacher)
+            String[] userTypes = { "Student", "Teacher" };
+            JComboBox<String> userTypeComboBox = new JComboBox<>(userTypes);
+            JPanel panel = new JPanel(new GridLayout(0, 1));
+            panel.add(new JLabel("User Type:"));
+            panel.add(userTypeComboBox);
+
+            int result = JOptionPane.showConfirmDialog(LoginPage.this, panel, "Register", JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE);
+
+            if (result == JOptionPane.OK_OPTION) {
+                String userType = (String) userTypeComboBox.getSelectedItem();
+
+                // Replace with your actual database URL, username, and password
+                String databaseUrl = "jdbc:mysql://localhost:3306/school";
+                String dbUsername = "mysql.infoschema";
+                String dbPassword = "omen0405";
+
+                if (Login.registerUser(userType, username, password, databaseUrl, dbUsername, dbPassword)) {
+                    JOptionPane.showMessageDialog(LoginPage.this, userType + " registration successful.");
+                } else {
+                    JOptionPane.showMessageDialog(LoginPage.this, "Registration failed.");
+                }
             }
         }
     }
