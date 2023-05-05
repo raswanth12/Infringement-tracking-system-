@@ -45,7 +45,7 @@ public class TeacherDashboard extends JFrame {
         compareButton.addActionListener(e -> compareSelectedFiles());
         buttonPanel.add(compareButton);
 
-        // Add the new "Check AI Generated" button
+        //  Add the new "Check AI Generated" button
         checkAiGeneratedButton = new JButton("Check AI Generated");
         checkAiGeneratedButton.addActionListener(e -> checkAiGenerated());
         buttonPanel.add(checkAiGeneratedButton);
