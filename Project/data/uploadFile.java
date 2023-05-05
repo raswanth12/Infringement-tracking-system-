@@ -1,4 +1,10 @@
+package Project.data;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class uploadFile{
 public static boolean uploadFile(int studentId, String filename, String content) {
     String query = "INSERT INTO uploaded_files (student_id, filename, content) VALUES (?, ?, ?)";
     try (Connection connection = DatabaseConnection.getConnection();
@@ -12,4 +18,4 @@ public static boolean uploadFile(int studentId, String filename, String content)
         e.printStackTrace();
         return false;
     }
-}
+}}

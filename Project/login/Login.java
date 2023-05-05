@@ -1,9 +1,15 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
+
+
+
+    import java.sql.Connection;
+    import java.sql.DriverManager;
+    import java.sql.PreparedStatement;
+    import java.sql.ResultSet;
+    import java.sql.SQLException;
+import java.util.List;
+
+    public class Login {
 public static boolean authenticateUser(String databaseUrl, String dbUsername, String dbPassword, String username, String password) {
     // Set up the database connection
     try (Connection connection = DriverManager.getConnection(databaseUrl, dbUsername, dbPassword)) {
@@ -40,4 +46,13 @@ public static boolean authenticateUser(String databaseUrl, String dbUsername, St
 
     // If no result was found in either table, the user is not authenticated
     return false;
+}
+
+public static List<FileRecord> getUploadedFiles() {
+    return null;
+}
+
+public static boolean uploadFile(String name, String content) {
+    return false;
+}
 }

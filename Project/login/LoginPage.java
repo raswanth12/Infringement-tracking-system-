@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class LoginPage extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -62,7 +63,7 @@ public class LoginPage extends JFrame {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            if (Login.authenticateUser("student", username, password)) {
+            if (Login.authenticateUser("student", username, password, password, password)) {
                 JOptionPane.showMessageDialog(LoginPage.this, "Student login successful.");
                 // Open StudentDashboard
                 new StudentDashboard();
@@ -79,7 +80,7 @@ public class LoginPage extends JFrame {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            if (Login.authenticateUser("teacher", username, password)) {
+            if (Login.authenticateUser("teacher", username, password, password, password)) {
                 JOptionPane.showMessageDialog(LoginPage.this, "Teacher login successful.");
                 // Open TeacherDashboard
                 new TeacherDashboard();
