@@ -122,7 +122,7 @@ public class LoginPage extends JFrame {
 
                 // Replace username, and password
                 String databaseUrl = "jdbc:mysql://localhost:3306/school";
-                String dbUsername = "mysql.infoschema";
+                String dbUsername = "root";
                 String dbPassword = "omen0405";
 
                 if (Login.registerUser(userType, username, password, databaseUrl, dbUsername, dbPassword)) {
