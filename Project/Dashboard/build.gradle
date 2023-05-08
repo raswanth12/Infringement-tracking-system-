@@ -1,1 +1,22 @@
 implementation 'org.apache.commons:commons-text:1.9'
+plugins {
+    id 'java'
+}
+
+group 'YOUR_GROUP_ID'
+version 'YOUR_VERSION'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Add OkHttp dependency
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+
+    // Add Gson dependency
+    implementation 'com.google.code.gson:gson:2.8.9'
+}
+

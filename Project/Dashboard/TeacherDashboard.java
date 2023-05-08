@@ -74,8 +74,7 @@ public class TeacherDashboard extends JFrame {
             return;
         }
 
-        // Call the Login.getUploadedFiles() method to retrieve the list of uploaded
-        // files from the database
+       
         List<FileRecord> uploadedFiles = (List<FileRecord>) Login.getUploadedFiles();
 
         // Create a map to hold the contents of the selected files
@@ -166,6 +165,10 @@ public class TeacherDashboard extends JFrame {
         fileNames.add("file2.txt");
         fileNames.add("file3.txt");
         return fileNames;
+    }
+
+    private List<String> fetchFileNames() {
+        return null;
     }
 
 }
