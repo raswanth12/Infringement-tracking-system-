@@ -22,7 +22,7 @@ public class StudentDashboard extends JFrame {
         setLayout(new FlowLayout());
 
         uploadButton = new JButton("Upload File");
-        uploadButton.addActionListener((ActionListener) new UploadFileListener());
+        uploadButton.addActionListener(new UploadFileListener());
         add(uploadButton);
 
         fileChooser = new JFileChooser();
@@ -32,17 +32,16 @@ public class StudentDashboard extends JFrame {
     }
 
     private class UploadFileListener implements ActionListener {
-        private ActionEvent e;
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            this.e = e;
             int result = fileChooser.showOpenDialog(StudentDashboard.this);
             if (result == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
                 try {
                     String content = new String(Files.readAllBytes(selectedFile.toPath()));
-                    boolean success = Login.uploadFile(/*studentId*/, selectedFile.getName(), content);
+                    // Make sure to replace "studentId" with the actual studentId
+                    int studentId = 1; // Or whatever the actual studentId is
+                    boolean success = Login.uploadFile(studentId, selectedFile.getName(), content);
                     if (success) {
                         JOptionPane.showMessageDialog(StudentDashboard.this, "File uploaded successfully.");
                     } else {
@@ -53,6 +52,11 @@ public class StudentDashboard extends JFrame {
                 }
             }
         }
+    }
+
+    // Other methods and code...
+
+
     //     private class UploadFileListener implements ActionListener {
     // @Override
     // public void actionPerformed(ActionEvent e) {
@@ -82,7 +86,7 @@ public class StudentDashboard extends JFrame {
             // TODO Auto-generated method stub
             throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
         }
-    }
+    
 
     public JButton getUploadButton() {
         return uploadButton;

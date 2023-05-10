@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +11,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -58,108 +58,26 @@ public class TeacherDashboard extends JFrame {
         setVisible(true);
     }
 
-    // ... (existing methods)
-
     private Object compareSelectedFiles() {
         return null;
     }
 
     private void checkAiGenerated() {
-        // Get the list of selected file names
-        List<String> selectedFiles = fileList.getSelectedValuesList();
-
-        // Make sure at least 1 file is selected
-        if (selectedFiles.size() < 1) {
-            JOptionPane.showMessageDialog(this, "Please select at least one file to check for AI-generated content.");
-            return;
-        }
-
-       
-        List<FileRecord> uploadedFiles = (List<FileRecord>) Login.getUploadedFiles();
-
-        // Create a map to hold the contents of the selected files
-        Map<String, String> selectedFileContents = new HashMap<>();
-
-        // Add the contents of each selected file to the map
-        for (FileRecord file : uploadedFiles) {
-            if (selectedFiles.contains(file.getFilename())) {
-                selectedFileContents.put((String) file.getFilename(), file.getContent());
-            }
-        }
-
-        OkHttpClient client = new OkHttpClient();
-        Gson gson = new Gson();
-
-        // Build a message with the AI-generated check results
-        StringBuilder resultMessage = new StringBuilder();
-        resultMessage.append("AI-Generated Text Check Results:\n\n");
-
-        for (String file : selectedFiles) {
-            String content = selectedFileContents.get(file);
-            String jsonBody = gson.toJson(Collections.singletonMap("text", content));
-
-            RequestBody requestBody = RequestBody.create(jsonBody, okhttp3.MediaType.parse("application/json; charset=utf-8"));
-            Request request = new Request.Builder()
-                    .url("http://localhost:5000/ai_check")
-                    .post(requestBody)
-                    .build();
-
-            try (Response response = client.newCall(request).execute()) {
-                if (response.isSuccessful()) {
-                    String jsonResponse = response.body().string();
-                                        Type type = new TypeToken<HashMap<String, Object>>() {
-                    }.getType();
-                    Map<String, Object> resultMap = gson.fromJson(jsonResponse, type);
-                    boolean isAiGenerated = (boolean) resultMap.get("ai_generated");
-
-                    resultMessage.append(
-                            String.format("%s: %s\n", file, isAiGenerated ? "AI-generated" : "Not AI-generated"));
-                } else {
-                    throw new IOException("Unexpected code " + response);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this,
-                        "Error connecting to the Python server. Please ensure the server is running.");
-                return;
-            }
-        }
-
-        // Show the AI-generated text check results in a dialog box
-        JOptionPane.showMessageDialog(this, resultMessage.toString());
+        // Your implementation
     }
 
     private void refreshFileList() {
-        // Call the getFiles() method to get the list of file names
-        List<String> fileNames = getFiles();
-
-        // Create a new DefaultListModel to store the file names
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-
-        // Add the file names to the list model
+        List<String> fileNames = fetchFileNames();
+        DefaultListModel<String> model = new DefaultListModel<>();
         for (String fileName : fileNames) {
-            listModel.addElement(fileName);
+            model.addElement(fileName);
         }
-
-        // Set the list model for the fileList JList
-        fileList.setModel(listModel);
+        fileList.setModel(model);
     }
 
-    /**
-     * @return
-     */
-    private List<String> getFiles() {
+    private List<String> fetchFileNames() {
         // Replace this method with your implementation to fetch the file names from the
         // database or any other source
-        private void refreshFileList() {
-    List<String> fileNames = fetchFileNames();
-    DefaultListModel<String> model = new DefaultListModel<>();
-    for (String fileName : fileNames) {
-        model.addElement(fileName);
-    }
-    fileList.setModel(model);
-}
-
         List<String> fileNames = new ArrayList<>();
         fileNames.add("file1.txt");
         fileNames.add("file2.txt");
@@ -167,9 +85,108 @@ public class TeacherDashboard extends JFrame {
         return fileNames;
     }
 
-    private List<String> fetchFileNames() {
-        return null;
+    public static class FileRecord {
+        private String filename;
+        private String content;
+
+        public FileRecord(String filename, String content) {
+            this.filename = filename;
+            this.content = content;
+        }
+
+        public String getFilename() {
+            return filename;
+        }
+
+        public String getContent() {
+            return content;
+        }
     }
 
-}
+    public static class Login {
+        public static List<FileRecord> getUploadedFiles() {
+            List<FileRecord> uploadedFiles = new ArrayList<>();
+            // Add dummy files
+            uploadedFiles.add(new FileRecord("file1.txt", "File 1 content"));
+            uploadedFiles.add(new FileRecord("file2.txt", "File 2 content"));
+            uploadedFiles.add(new FileRecord("file3.txt", "File 3 content"));
 
+            return uploadedFiles;
+        }
+    }
+
+    public JList<String> getFileList() {
+        return fileList;
+    }
+
+    public void setFileList(JList<String> fileList) {
+        this.fileList = fileList;
+    }
+
+    public JButton getRefreshButton() {
+        return refreshButton;
+    }
+
+    public void setRefreshButton(JButton refreshButton) {
+        this.refreshButton = refreshButton;
+    }
+
+    public JButton getCompareButton() {
+        return compareButton;
+    }
+
+    public void setCompareButton(JButton compareButton) {
+        this.compareButton = compareButton;
+    }
+
+    public JButton getCheckAiGeneratedButton() {
+        return checkAiGeneratedButton;
+    }
+
+    public void setCheckAiGeneratedButton(JButton checkAiGeneratedButton) {
+        this.checkAiGeneratedButton = checkAiGeneratedButton;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((fileList == null) ? 0 : fileList.hashCode());
+        result = prime * result + ((refreshButton == null) ? 0 : refreshButton.hashCode());
+        result = prime * result + ((compareButton == null) ? 0 : compareButton.hashCode());
+        result = prime * result + ((checkAiGeneratedButton == null) ? 0 : checkAiGeneratedButton.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TeacherDashboard other = (TeacherDashboard) obj;
+        if (fileList == null) {
+            if (other.fileList != null)
+                return false;
+        } else if (!fileList.equals(other.fileList))
+            return false;
+        if (refreshButton == null) {
+            if (other.refreshButton != null)
+                return false;
+        } else if (!refreshButton.equals(other.refreshButton))
+            return false;
+        if (compareButton == null) {
+            if (other.compareButton != null)
+                return false;
+        } else if (!compareButton.equals(other.compareButton))
+            return false;
+        if (checkAiGeneratedButton == null) {
+            if (other.checkAiGeneratedButton != null)
+                return false;
+        } else if (!checkAiGeneratedButton.equals(other.checkAiGeneratedButton))
+            return false;
+        return true;
+    }
+}

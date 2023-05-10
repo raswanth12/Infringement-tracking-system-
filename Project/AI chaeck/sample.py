@@ -3,7 +3,7 @@ import json
 import tkinter as tk
 from tkinter import filedialog
 
-API_KEY = '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'
+API_KEY = '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'
 
 
 def is_ai_generated(text):

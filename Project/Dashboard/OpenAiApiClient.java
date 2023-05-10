@@ -9,6 +9,7 @@ import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
 import okhttp3.*;
+import sampleclass.OkHttpClient;
 
 public class OpenAiApiClient {
     private static final String API_KEY = "your_openai_api_key";
