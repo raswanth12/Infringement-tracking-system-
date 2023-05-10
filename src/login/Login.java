@@ -82,4 +82,8 @@ public static boolean registerUser(String userType, String username, String pass
     return false;
 }
 
+public static boolean uploadFile(int studentId, String name, String content) {
+    return false;
+}
+
 }

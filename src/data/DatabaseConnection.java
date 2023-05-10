@@ -1,5 +1,5 @@
 
-package Project.data;
+package src.data;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
