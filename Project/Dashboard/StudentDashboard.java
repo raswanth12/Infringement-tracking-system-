@@ -53,6 +53,26 @@ public class StudentDashboard extends JFrame {
                 }
             }
         }
+    //     private class UploadFileListener implements ActionListener {
+    // @Override
+    // public void actionPerformed(ActionEvent e) {
+    //     int result = fileChooser.showOpenDialog(StudentDashboard.this);
+    //     if (result == JFileChooser.APPROVE_OPTION) {
+    //         File selectedFile = fileChooser.getSelectedFile();
+    //         try {
+    //             String content = new String(Files.readAllBytes(selectedFile.toPath()));
+    //             boolean success = Login.uploadFile(/*studentId*/, selectedFile.getName(), content);
+    //             if (success) {
+    //                 JOptionPane.showMessageDialog(StudentDashboard.this, "File uploaded successfully.");
+    //             } else {
+    //                 JOptionPane.showMessageDialog(StudentDashboard.this, "File upload failed.");
+    //             }
+    //         } catch (IOException ex) {
+    //             ex.printStackTrace();
+    //         }
+    //     }
+    // }
+    //     }
 
         /**
          * @param e
@@ -63,4 +83,53 @@ public class StudentDashboard extends JFrame {
             throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
         }
     }
+
+    public JButton getUploadButton() {
+        return uploadButton;
+    }
+
+    public void setUploadButton(JButton uploadButton) {
+        this.uploadButton = uploadButton;
+    }
+
+    public JFileChooser getFileChooser() {
+        return fileChooser;
+    }
+
+    public void setFileChooser(JFileChooser fileChooser) {
+        this.fileChooser = fileChooser;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((uploadButton == null) ? 0 : uploadButton.hashCode());
+        result = prime * result + ((fileChooser == null) ? 0 : fileChooser.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        StudentDashboard other = (StudentDashboard) obj;
+        if (uploadButton == null) {
+            if (other.uploadButton != null)
+                return false;
+        } else if (!uploadButton.equals(other.uploadButton))
+            return false;
+        if (fileChooser == null) {
+            if (other.fileChooser != null)
+                return false;
+        } else if (!fileChooser.equals(other.fileChooser))
+            return false;
+        return true;
+    }
 }
+
+
