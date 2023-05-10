@@ -5,7 +5,5 @@
     ],
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\HP\\OneDrive\\Desktop\\mysql-connector-j-8.0.33.jar"
     ],
-    "java.configuration.updateBuildConfiguration": "interactive"
 }

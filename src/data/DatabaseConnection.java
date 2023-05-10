@@ -1,12 +1,10 @@
 
 package src.data;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DatabaseConnection {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306//school"; 
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/school"; 
                                                                                 
     private static final String DB_USER = "root"; 
     private static final String DB_PASSWORD = "omen0405"; 

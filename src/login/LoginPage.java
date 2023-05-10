@@ -3,8 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-
 public class LoginPage extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
@@ -73,7 +71,7 @@ public class LoginPage extends JFrame {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            if (Login.authenticateUser("student", username, password, password, password)) {
+            if (Login.authenticateUser("jdbc:mysql://localhost:3306/school", "root", "omen0405")) {
                 JOptionPane.showMessageDialog(LoginPage.this, "Student login successful.");
                 // Open StudentDashboard
                 new StudentDashboard();
@@ -90,7 +88,7 @@ public class LoginPage extends JFrame {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            if (Login.authenticateUser("teacher", username, password, password, password)) {
+            if (Login.authenticateUser("jdbc:mysql://localhost:3306/school", username, password, password, password)) {
                 JOptionPane.showMessageDialog(LoginPage.this, "Teacher login successful.");
                 // Open TeacherDashboard
                 new TeacherDashboard();
@@ -100,14 +98,14 @@ public class LoginPage extends JFrame {
             }
         }
     }
-    
+
     private class RegisterListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            //  user to select  (Student or Teacher)
+            // user to select (Student or Teacher)
             String[] userTypes = { "Student", "Teacher" };
             JComboBox<String> userTypeComboBox = new JComboBox<>(userTypes);
             JPanel panel = new JPanel(new GridLayout(0, 1));
