@@ -11,7 +11,7 @@ import okhttp3.Response;
 import sampleclass.OkHttpClient;
 
 public class OpenAiApiClient {
-    private static final String API_KEY = "your_openai_api_key";
+    private static final String API_KEY = "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";
     private static final String API_URL = "https://api.openai.com/v1/engines/davinci-codex/completions";
 
     /**
@@ -20,7 +20,7 @@ public class OpenAiApiClient {
      * @throws IOException
      */ 
     public static String isAiGenerated(String prompt) throws IOException {
-        OkHttpClient client = new OkHttpClient();
+        final OkHttpClient client = new OkHttpClient();
         Moshi moshi = new Moshi.Builder().build();
         JsonAdapter<CompletionRequest> requestAdapter = moshi.adapter(CompletionRequest.class);
         JsonAdapter<CompletionResponse> responseAdapter = moshi.adapter(CompletionResponse.class);

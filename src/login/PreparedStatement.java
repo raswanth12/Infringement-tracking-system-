@@ -9,4 +9,11 @@ public class PreparedStatement {
         return null;
     }
 
+    public void setInt(int i, int studentId) {
+    }
+
+    public int executeUpdate() {
+        return 0;
+    }
+
 }

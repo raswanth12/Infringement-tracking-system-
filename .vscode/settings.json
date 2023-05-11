@@ -6,4 +6,5 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
     ],
+    "java.compile.nullAnalysis.mode": "automatic",
 }
