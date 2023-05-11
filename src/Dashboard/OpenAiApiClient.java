@@ -1,20 +1,24 @@
 import java.io.IOException;
 import java.util.List;
 
-import javax.xml.ws.Response;
-
-import org.omg.CORBA.Request;
-
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
-import okhttp3.*;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import sampleclass.OkHttpClient;
 
 public class OpenAiApiClient {
     private static final String API_KEY = "your_openai_api_key";
     private static final String API_URL = "https://api.openai.com/v1/engines/davinci-codex/completions";
 
+    /**
+     * @param prompt
+     * @return
+     * @throws IOException
+     */ 
     public static String isAiGenerated(String prompt) throws IOException {
         OkHttpClient client = new OkHttpClient();
         Moshi moshi = new Moshi.Builder().build();
