@@ -32,6 +32,7 @@ public class StudentDashboard extends JFrame {
     }
 
     private class UploadFileListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             int result = fileChooser.showOpenDialog(StudentDashboard.this);
@@ -40,8 +41,8 @@ public class StudentDashboard extends JFrame {
                 try {
                     String content = new String(Files.readAllBytes(selectedFile.toPath()));
                     // Make sure to replace "studentId" with the actual studentId
-                    int studentId = 1; // Or whatever the actual studentId is
-                    boolean success = Login.uploadFile(content, content, content, studentId, selectedFile.getName(), content);
+                    int studentId = 3; // Or whatever the actual studentId is
+                    boolean success = Login.uploadFile(studentId, selectedFile.getName(), content);
                     if (success) {
                         JOptionPane.showMessageDialog(StudentDashboard.this, "File uploaded successfully.");
                     } else {
@@ -53,6 +54,29 @@ public class StudentDashboard extends JFrame {
             }
         }
     }
+
+    // private class UploadFileListener implements ActionListener {
+    //     @Override
+    //     public void actionPerformed(ActionEvent e) {
+    //         int result = fileChooser.showOpenDialog(StudentDashboard.this);
+    //         if (result == JFileChooser.APPROVE_OPTION) {
+    //             File selectedFile = fileChooser.getSelectedFile();
+    //             try {
+    //                 String content = new String(Files.readAllBytes(selectedFile.toPath()));
+    //                 // Make sure to replace "studentId" with the actual studentId
+    //                 int studentId = 1; // Or whatever the actual studentId is
+    //                 boolean success = Login.uploadFile(studentId, selectedFile.getName(), content);
+    //                 if (success) {
+    //                     JOptionPane.showMessageDialog(StudentDashboard.this, "File uploaded successfully.");
+    //                 } else {
+    //                     JOptionPane.showMessageDialog(StudentDashboard.this, "File upload failed.");
+    //                 }
+    //             } catch (IOException ex) {
+    //                 ex.printStackTrace();
+    //             }
+    //         }
+    //     }
+    // }
 
         /**
          * @param e

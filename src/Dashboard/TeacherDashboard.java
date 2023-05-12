@@ -204,8 +204,8 @@ public class TeacherDashboard extends JFrame {
         public static List<FileRecord> getUploadedFiles() {
             List<FileRecord> uploadedFiles = new ArrayList<>();
             // Add dummy files
-            uploadedFiles.add(new FileRecord("file1.txt", "File 1 content"));
-            uploadedFiles.add(new FileRecord("file2.txt", "File 2 content"));
+            uploadedFiles.add(new FileRecord("file1.txt", "Project/ai-1.txt"));
+            uploadedFiles.add(new FileRecord("file2.txt", "Project/ai.txt"));
             uploadedFiles.add(new FileRecord("file3.txt", "File 3 content"));
 
             return uploadedFiles;
