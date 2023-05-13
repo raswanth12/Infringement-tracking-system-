@@ -46,6 +46,11 @@
 
 ![1eb3b498-c9e8-4db3-b84f-b2f41d225d74](https://user-images.githubusercontent.com/113978278/236873481-45e377eb-3912-4f70-9c5b-6d18ce0732a5.jpg)
 
-**LOGIN PAGE**
-# This login page is form Teacher and studnet 
+##LOGIN PAGE
+
 ![image](https://github.com/raswanth12/Infringement-tracking-system-/assets/83648180/186644f2-db66-4e1a-8737-792cee8c02f4)
+
+## Register new user 
+
+![image](https://github.com/raswanth12/Infringement-tracking-system-/assets/83648180/bb7eecf1-2c28-4db1-8288-391ab9f9bcfb)
+
