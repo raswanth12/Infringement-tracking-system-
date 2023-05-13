@@ -45,3 +45,15 @@
 ## ER digram
 
 ![1eb3b498-c9e8-4db3-b84f-b2f41d225d74](https://user-images.githubusercontent.com/113978278/236873481-45e377eb-3912-4f70-9c5b-6d18ce0732a5.jpg)
+
+**LOGIN PAGE**
+
+Login page for students and teachers 
+
+![image](https://github.com/raswanth12/Infringement-tracking-system-/assets/83648180/3db9b3a4-b247-4e9e-beea-ee9da421da89)
+
+
+
+
+
+
